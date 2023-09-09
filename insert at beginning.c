@@ -10,7 +10,7 @@ void add_at_beginning(struct node **head,int data)
     struct node *ptr=*head;
     struct node *ptr2= (struct node*)malloc(sizeof(struct node));
     ptr2->data=data;
-    ptr2->link=*head;
+    ptr2->link=ptr;
     *head=ptr2;
 
 }
