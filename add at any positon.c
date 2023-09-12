@@ -5,13 +5,20 @@ struct node
     int data;
     struct node *link;
 };
-void add_at_pos(struct node *head,int data,int pos)
+void add_at_pos(struct node **head,int data,int pos)
 {
-    struct node *ptr=head;
+    struct node *ptr=*head;
     struct node *ptr2= (struct node*)malloc(sizeof(struct node));
     ptr2->data=data;
     ptr2->link=NULL;
-    while(pos !=2)
+    if(pos==1)
+    {
+         ptr2->link=ptr;
+        *head=ptr2;
+
+    }
+    else
+        while(pos !=2)
     {
         ptr=ptr->link;
         pos--;
@@ -42,7 +49,7 @@ int main()
     printf("Before inserting node at a certain point\n");
     printf("%d->%d->%d->NULL\n\n",head->data,head2->data,head3->data);
 
-    add_at_pos(head,data,pos);
+    add_at_pos(&head,data,pos);
     printf("After inserting in any position\n");
     while(head!=NULL)
     {
