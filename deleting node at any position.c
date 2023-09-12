@@ -5,16 +5,24 @@ struct node
     int data;
     struct node *link;
 };
-void del_at_pos(struct node *head,int pos)
+void del_at_pos(struct node **head,int pos)
 {
-    struct node *temp=head;
-   struct node *temp2=head;
-    while(pos !=1)
+    struct node *temp=*head;
+    struct node *temp2=*head;
+    if(pos==1)
     {
-        temp=temp2;
-        temp2=temp2->link;
-        pos--;
+        *head = (*head)->link;
+        free(temp);
+        temp->link = NULL;
+
     }
+    else
+        while(pos !=1)
+        {
+            temp=temp2;
+            temp2=temp2->link;
+            pos--;
+        }
     temp->link=temp2->link;
 
 }
@@ -41,7 +49,7 @@ int main()
     printf("Before Deleting node at a certain point\n");
     printf("%d->%d->%d->NULL\n\n",head->data,head2->data,head3->data);
 
-    del_at_pos(head,pos);
+    del_at_pos(&head,pos);
     printf("After deleting in any position\n");
     while(head!=NULL)
     {
