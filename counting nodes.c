@@ -3,7 +3,7 @@
 struct node
 {
     int data;
-    struct node *link
+    struct node *link;
     };
 void count_of_nodes(struct node *head)//using a function for counting;
 {
