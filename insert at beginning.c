@@ -16,7 +16,7 @@ void add_at_beginning(struct node **head,int data)
 }
 int main()
 {
-    int data,pos;
+    int data;
     printf("Enter the data= ");
     scanf("%d",&data);
     struct node *head=(struct node*)malloc(sizeof(struct node));
