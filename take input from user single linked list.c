@@ -22,6 +22,7 @@ void insert_node(struct node **head, int data)
         *head = newnode;   // Set the head pointer to the new node
         return;            // Exit the function
     }
+    else{
 
     // Otherwise, traverse the list to find the last node
     struct node *current = *head;
@@ -32,8 +33,7 @@ void insert_node(struct node **head, int data)
 
     // Add the new node to the end of the list
     current->link = newnode;
-}
-
+}}
 int main()
 {
     int n, i;
