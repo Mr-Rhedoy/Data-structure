@@ -37,12 +37,21 @@ int main()
     node3->prev = node2; // Node3 points back to node2
     node2->prev = head; // Node2 points back to the head
 
-    // Traverse the doubly linked list and print its contents
+    // Traverse the doubly linked list and print its contents in the forward direction
     struct node *current = head; // Start at the head
     while (current != NULL)
     {
         printf("%d->", current->data); // Print the data in the current node
         current = current->link;       // Move to the next node
+    }
+    printf("NULL\n");
+
+    // Traverse the doubly linked list and print its contents in the backward direction
+    struct node *current2 = node3; // Start at the last node
+    while (current2 != NULL)
+    {
+        printf("%d->", current2->data); // Print the data in the current node
+        current2 = current2->prev;       // Move to the previous node
     }
     printf("NULL\n"); // Print NULL to indicate the end of the list
 
