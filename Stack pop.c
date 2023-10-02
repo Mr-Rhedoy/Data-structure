@@ -16,7 +16,7 @@ void push(int data)
     }
     else
     {
-        // Increment the top and add data to the stack
+        // Increment the top and add data to the stack.
         top++;
         stack_arr[top] = data;
         printf("Pushed %d onto the stack\n", data);
