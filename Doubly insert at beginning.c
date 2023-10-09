@@ -1,81 +1,82 @@
-#include <stdio.h>
-#include <stdlib.h>
-
-// Define a structure for a doubly linked list node
+#include<stdio.h>
+#include<stdlib.h>
 struct node
-{
-    struct node *prev; // Pointer to the previous node
-    int data;         // Data stored in the node
-    struct node *link; // Pointer to the next node
+{   struct node *prev;
+    int data;
+    struct node *link;
 };
-void insert_at_beginning(struct node **head,int data)
+void add_beginning(struct node **node1,int data)
 {
-    struct node *ptr= *head;
-    struct node *ptr2=(struct node*)malloc(sizeof (struct node));
-    ptr2->data=data;
-    ptr2->link=ptr;
-    ptr->prev=ptr2;
-    ptr2->prev= NULL;
-    *head=ptr2;
+    struct node *temp=*node1;
+    struct node *newnode=(struct node*)malloc(sizeof(struct node));
+
+    newnode->data=data;
+    newnode->link=temp;;
+    newnode->prev=NULL;
+
+    temp->prev=newnode;
+
+
+    *node1=newnode;
 }
+
 int main()
 {
-    // Create the head node and initialize it
-    struct node *head = (struct node *)malloc(sizeof(struct node));
-    head->prev = NULL; // The head node has no previous node
-    head->data = 10;   // Set data in the head node to 10
-    head->link = NULL; // Initialize the link to NULL since there's only one node for now
+    struct node *node1=(struct node*)malloc(sizeof(struct node));
+    node1->prev=NULL;
+    node1->data=10;
+    node1->link=NULL;
 
-    // Create the second node (node2) and initialize it
-    struct node *node2 = (struct node *)malloc(sizeof(struct node));
-    node2->prev = NULL; // The previous pointer will be set later
-    node2->data = 20;   // Set data in node2 to 20
-    node2->link = NULL; // Initialize the link to NULL for now
+    struct node *node2=(struct node*)malloc(sizeof(struct node));
+    node2->prev=NULL;
+    node2->data=20;
+    node2->link=NULL;
 
-    // Create the third node (node3) and initialize it
-    struct node *node3 = (struct node *)malloc(sizeof(struct node));
-    node3->prev = NULL; // The previous pointer will be set later
-    node3->data = 30;   // Set data in node3 to 30
-    node3->link = NULL; // There are no more nodes after node3
+    struct node *node3=(struct node*)malloc(sizeof(struct node));
+    node3->prev=NULL;
+    node3->data=30;
+    node3->link=NULL;
 
-    // Establish the forward links between nodes
-    head->link = node2; // Head points to node2
-    node2->link = node3; // Node2 points to node3
+    struct node *node4=(struct node*)malloc(sizeof(struct node));
+    node4->prev=NULL;
+    node4->data=40;
+    node4->link=NULL;
 
-    // Establish the backward links between nodes
-    node3->prev = node2; // Node3 points back to node2
-    node2->prev = head; // Node2 points back to the head
+    struct node *node5=(struct node*)malloc(sizeof(struct node));
+    node5->prev=NULL;
+    node5->data=50;
+    node5->link=NULL;
 
-    printf("Before inserting node at a  beginning\n");
-    printf("%d->%d->%d->NULL",head->data,node2->data,node3->data);
-    printf("\n\n");
-    insert_at_beginning(&head,20);
+    node1->link=node2;
+    node2->link=node3;
+    node3->link=node4;
+    node4->link=node5;
+    node5->link=NULL;
 
-    printf("Traversing from beginning\n\n");
+    node5->prev=node4;
+    node4->prev=node3;
+    node3->prev=node2;
+    node2->prev=node1;
+    node1->prev=NULL;
 
-    // Traverse the doubly linked list and print its contents in the forward direction
-    struct node *current = head; // Start at the head
-    while (current != NULL)
+    struct node *temp=node1;
+    while(temp!=NULL)
     {
-        printf("%d->", current->data); // Print the data in the current node
-        current = current->link;       // Move to the next node
+        printf("%d->",temp->data);
+        temp=temp->link;
     }
     printf("NULL\n");
 
-    printf("Traversing from end\n\n");
-    // Traverse the doubly linked list and print its contents in the backward direction
-    struct node *current2 = node3; // Start at the last node
-    while (current2 != NULL)
+    int data;
+    printf("Enter the data= ");
+    scanf("%d",&data);
+
+    add_beginning(&node1,data);
+    struct node *temp2=node5;
+    while(temp2!=NULL)
     {
-        printf("%d->", current2->data); // Print the data in the current node
-        current2 = current2->prev;       // Move to the previous node
+        printf("%d->",temp2->data);
+        temp2=temp2->prev;
     }
-    printf("NULL\n"); // Print NULL to indicate the end of the list
-
-
-    free(head);
-    free(node2);
-    free(node3);
-
-    return 0;
+    printf("NULL\n");
 }
