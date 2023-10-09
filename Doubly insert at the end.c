@@ -1,100 +1,86 @@
-#include <stdio.h>
-#include <stdlib.h>
-
-// Define a structure for a doubly linked list node
+#include<stdio.h>
+#include<stdlib.h>
 struct node
-{
-    struct node *prev;  // Pointer to the previous node
-    int data;           // Data stored in the node
-    struct node *link;  // Pointer to the next node
+{   struct node *prev;
+    int data;
+    struct node *link;
 };
-
-// Function to insert a new node at the end of the linked list
-void insert_at_end(struct node *head, int data)
+void add_end(struct node **node1,int data)
 {
-    // Create a new node
-    struct node *newnode = (struct node*)malloc(sizeof(struct node));
-    newnode->prev = NULL;
-    newnode->data = data;
-    newnode->link = NULL;
+    struct node *temp=*node1;
+    struct node *newnode=(struct node*)malloc(sizeof(struct node));
+    newnode->prev=NULL;
+    newnode->data=data;
+    newnode->link=NULL;;
 
-    // Traverse the list to find the current last node
-    struct node *current = head;
-    while (current->link != NULL)
+
+     while(temp->link!=NULL)
     {
-        current = current->link;
+        temp=temp->link;
     }
+    temp->link=newnode;
+    newnode->prev=temp;
 
-    // Update pointers to insert the new node at the end
-    current->link = newnode;
-    newnode->prev = current;
+    struct node *temp2=newnode;
+    while(newnode!=NULL)
+    {
+        printf("<-%d",temp2->data);
+        temp2=temp2->prev;
+    }
+    printf("NULL\n");
 }
 
 int main()
 {
-    // Create the head node and initialize it
-    struct node *head = (struct node *)malloc(sizeof(struct node));
-    head->prev = NULL;
-    head->data = 10;
-    head->link = NULL;
+    struct node *node1=(struct node*)malloc(sizeof(struct node));
+    node1->prev=NULL;
+    node1->data=10;
+    node1->link=NULL;
 
-    // Create additional nodes and set their data and pointers
-    struct node *node2 = (struct node *)malloc(sizeof(struct node));
-    node2->prev = NULL;
-    node2->data = 20;
-    node2->link = NULL;
+    struct node *node2=(struct node*)malloc(sizeof(struct node));
+    node2->prev=NULL;
+    node2->data=20;
+    node2->link=NULL;
 
-    struct node *node3 = (struct node *)malloc(sizeof(struct node));
-    node3->prev = NULL;
-    node3->data = 30;
-    node3->link = NULL;
+    struct node *node3=(struct node*)malloc(sizeof(struct node));
+    node3->prev=NULL;
+    node3->data=30;
+    node3->link=NULL;
 
-    // Connect nodes to form a linked list
-    head->link = node2;
-    node2->link = node3;
+    struct node *node4=(struct node*)malloc(sizeof(struct node));
+    node4->prev=NULL;
+    node4->data=40;
+    node4->link=NULL;
 
-    // Set reverse pointers to make it a doubly linked list
-    node3->prev = node2;
-    node2->prev = head;
+    struct node *node5=(struct node*)malloc(sizeof(struct node));
+    node5->prev=NULL;
+    node5->data=50;
+    node5->link=NULL;
 
-    // Print the original linked list
-    printf("Before inserting node at the end\n");
-    printf("%d->%d->%d->NULL", head->data, node2->data, node3->data);
-    printf("\n\n");
+    node1->link=node2;
+    node2->link=node3;
+    node3->link=node4;
+    node4->link=node5;
+    node5->link=NULL;
 
-    // Insert a new node at the end of the linked list
-    insert_at_end(head, 69);
+    node5->prev=node4;
+    node4->prev=node3;
+    node3->prev=node2;
+    node2->prev=node1;
+    node1->prev=NULL;
 
-    // Print the linked list from the beginning
-    printf("Traversing from beginning\n\n");
-    struct node *current2 = head;
-    while (current2 != NULL)
+    struct node *temp=node1;
+    while(temp!=NULL)
     {
-        printf("%d->", current2->data);
-        current2 = current2->link;
+        printf("%d->",temp->data);
+        temp=temp->link;
     }
     printf("NULL\n");
 
-    // Print the linked list from the end
-    printf("Traversing from end\n\n");
-    struct node *current3 = NULL;
-    struct node *temp = head;
-    while (temp != NULL)
-    {
-        current3 = temp;
-        temp = temp->link;
-    }
-    while (current3 != NULL)
-    {
-        printf("%d->", current3->data);
-        current3 = current3->prev;
-    }
-    printf("NULL\n");
+    int data;
+    printf("Enter the data= ");
+    scanf("%d",&data);
 
-    // Free dynamically allocated memory
-    free(head);
-    free(node2);
-    free(node3);
-
-    return 0;
+    add_end(&node1,data);
+    printf("\n");
 }
