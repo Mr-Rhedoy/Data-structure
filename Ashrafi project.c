@@ -241,7 +241,7 @@ void secondSemester()
         case 3:
             printf("\nSecond Semester Courses:\n");
             printf("%-12s %-45s %-6s %-16s %s\n", "Course Code", "Course Title", "Credit", "Section", "Teacher");
-            printf("Teacher\n");
+            printf("\n");
             for (int i = 0; i < numCourses; ++i)
             {
                 printf("%-12s %-45s %-6d %-16s %s\n", courses[i]->code, courses[i]->title, courses[i]->credit, courses[i]->section, courses[i]->teacher);
